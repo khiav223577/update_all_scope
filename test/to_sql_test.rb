@@ -47,4 +47,23 @@ class UpdateAllScopeTest < Minitest::Test
       )
     end
   end
+
+  def test_update_name_with_multiple_where_conditions
+    scope = UpdateAllScope::UpdateAllScope.new(relation: User.where(id: [-1, -2]).where(name: 'wong'))
+    scope.update(name: 'wolf')
+
+    if ActiveRecord::VERSION::MAJOR < 4
+      assert_equal_in_dbs(
+        scope.to_sql,
+        pg: %{UPDATE "users" SET "name" = 'wolf' WHERE "users"."id" IN (-1, -2) AND "users"."name" = 'wong'},
+        mysql: %{UPDATE `users` SET `name` = 'wolf' WHERE `users`.`id` IN (-1, -2) AND `users`.`name` = 'wong'}
+      )
+    else
+      assert_equal_in_dbs(
+        scope.to_sql,
+        pg: %{UPDATE "users" SET "name" = 'wolf' WHERE "users"."id" IN (-1, -2) AND "users"."name" = 'wong'},
+        mysql: %{UPDATE `users` SET `users`.`name` = 'wolf' WHERE `users`.`id` IN (-1, -2) AND `users`.`name` = 'wong'}
+      )
+    end
+  end
 end
