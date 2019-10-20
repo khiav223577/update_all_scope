@@ -28,4 +28,23 @@ class UpdateAllScopeTest < Minitest::Test
       )
     end
   end
+
+  def test_update_name_where_in_condition
+    scope = UpdateAllScope::UpdateAllScope.new(relation: User.where(id: [-1, -2]))
+    scope.update(name: 'wolf')
+
+    if ActiveRecord::VERSION::MAJOR < 4
+      assert_equal_in_dbs(
+        scope.to_sql,
+        pg: %{UPDATE "users" SET "name" = 'wolf' WHERE "users"."id" IN (-1, -2)},
+        mysql: %{UPDATE `users` SET `name` = 'wolf' WHERE `users`.`id` IN (-1, -2)}
+      )
+    else
+      assert_equal_in_dbs(
+        scope.to_sql,
+        pg: %{UPDATE "users" SET "name" = 'wolf' WHERE "users"."id" IN (-1, -2)},
+        mysql: %{UPDATE `users` SET `users`.`name` = 'wolf' WHERE `users`.`id` IN (-1, -2)}
+      )
+    end
+  end
 end
