@@ -11,11 +11,11 @@ class UpdateAllScopeTest < Minitest::Test
   end
 
   def test_update_name_with_where_condition
-  	scope = UpdateAllScope::UpdateAllScope.new(relation: User.where(id: -1))
-  	scope.update(name: 'wolf')
+    scope = UpdateAllScope::UpdateAllScope.new(relation: User.where(id: -1))
+    scope.update(name: 'wolf')
 
     assert_equal_in_dbs(
-      scope.to_sql, 
+      scope.to_sql,
       pg: %{UPDATE "users" SET "name" = 'wolf' WHERE "users"."id" = -1},
       mysql: %{UPDATE `users` SET `users`.`name` = 'wolf' WHERE `users`.`id` = -1}
     )
