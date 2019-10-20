@@ -100,13 +100,15 @@ module UpdateAllScope
     def to_sql_and_binds(connection, arel_or_sql_string)
       return connection.send(:to_sql_and_binds, arel_or_sql_string, []) if connection.respond_to?(:to_sql_and_binds, true)
       return [arel_or_sql_string.dup.freeze, []] if !arel_or_sql_string.respond_to?(:ast)
-      sql, binds = accept(connection, arel_or_sql_string.ast)
-      return [sql.freeze, (binds || []) + bind_values]
+
+      sql = accept(connection, arel_or_sql_string.ast)
+      return [sql.freeze, bind_values] if sql.is_a?(String)
+      return [sql.compile(bind_values, connection), bind_values]
     end
 
     def accept(connection, ast)
       return connection.visitor.accept(ast) if not connection.respond_to?(:collector) # For Rails 3
-      return connection.visitor.accept(ast, connection.collector).value
+      return connection.visitor.accept(ast, connection.collector)
     end
 
     def type_casted_binds(connection, binds)
