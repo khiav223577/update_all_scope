@@ -27,6 +27,21 @@ def in_sandbox
   end
 end
 
+def pg?
+  return false if not defined?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter)
+  return User.connection.is_a?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter)
+end
+
+def mysql?
+  return false if not defined?(ActiveRecord::ConnectionAdapters::Mysql2Adapter)
+  return User.connection.is_a?(ActiveRecord::ConnectionAdapters::Mysql2Adapter)
+end
+
+def assert_equal_in_dbs(result, expected)
+  assert_equal expected[:pg], result if pg?
+  assert_equal expected[:mysql], result if mysql?
+end
+
 def assert_queries(expected_count, event_key = 'sql.active_record')
   sqls = []
   subscriber = ActiveSupport::Notifications.subscribe(event_key) do |_, _, _, _, payload|
