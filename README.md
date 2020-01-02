@@ -8,7 +8,9 @@
 
 `update_all_scope` is a Ruby Gem for you to write update queries.
 
-Supports Rails 3.2, 4.2, 5.0, 5.1, 5.2, 6.0.
+## Supports
+- Ruby 2.2 ~ 2.7
+- Rails 3.2, 4.2, 5.0, 5.1, 5.2, 6.0
 
 ## Installation
 
