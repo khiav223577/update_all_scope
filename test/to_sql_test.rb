@@ -17,14 +17,14 @@ class UpdateAllScopeTest < Minitest::Test
     if ActiveRecord::VERSION::MAJOR < 4
       assert_equal_in_dbs(
         scope.to_sql,
-        pg: %{UPDATE "users" SET "name" = 'wolf' WHERE "users"."id" = -1},
-        mysql: %{UPDATE `users` SET `name` = 'wolf' WHERE `users`.`id` = -1}
+        pg: %(UPDATE "users" SET "name" = 'wolf' WHERE "users"."id" = -1),
+        mysql: %(UPDATE `users` SET `name` = 'wolf' WHERE `users`.`id` = -1),
       )
     else
       assert_equal_in_dbs(
         scope.to_sql,
-        pg: %{UPDATE "users" SET "name" = 'wolf' WHERE "users"."id" = -1},
-        mysql: %{UPDATE `users` SET `users`.`name` = 'wolf' WHERE `users`.`id` = -1}
+        pg: %(UPDATE "users" SET "name" = 'wolf' WHERE "users"."id" = -1),
+        mysql: %(UPDATE `users` SET `users`.`name` = 'wolf' WHERE `users`.`id` = -1),
       )
     end
   end
@@ -37,13 +37,13 @@ class UpdateAllScopeTest < Minitest::Test
       assert_equal_in_dbs(
         scope.to_sql,
         pg: %{UPDATE "users" SET "name" = 'wolf' WHERE "users"."id" IN (-1, -2)},
-        mysql: %{UPDATE `users` SET `name` = 'wolf' WHERE `users`.`id` IN (-1, -2)}
+        mysql: %{UPDATE `users` SET `name` = 'wolf' WHERE `users`.`id` IN (-1, -2)},
       )
     else
       assert_equal_in_dbs(
         scope.to_sql,
         pg: %{UPDATE "users" SET "name" = 'wolf' WHERE "users"."id" IN (-1, -2)},
-        mysql: %{UPDATE `users` SET `users`.`name` = 'wolf' WHERE `users`.`id` IN (-1, -2)}
+        mysql: %{UPDATE `users` SET `users`.`name` = 'wolf' WHERE `users`.`id` IN (-1, -2)},
       )
     end
   end
@@ -56,13 +56,13 @@ class UpdateAllScopeTest < Minitest::Test
       assert_equal_in_dbs(
         scope.to_sql,
         pg: %{UPDATE "users" SET "name" = 'wolf' WHERE "users"."id" IN (-1, -2) AND "users"."name" = 'wong'},
-        mysql: %{UPDATE `users` SET `name` = 'wolf' WHERE `users`.`id` IN (-1, -2) AND `users`.`name` = 'wong'}
+        mysql: %{UPDATE `users` SET `name` = 'wolf' WHERE `users`.`id` IN (-1, -2) AND `users`.`name` = 'wong'},
       )
     else
       assert_equal_in_dbs(
         scope.to_sql,
         pg: %{UPDATE "users" SET "name" = 'wolf' WHERE "users"."id" IN (-1, -2) AND "users"."name" = 'wong'},
-        mysql: %{UPDATE `users` SET `users`.`name` = 'wolf' WHERE `users`.`id` IN (-1, -2) AND `users`.`name` = 'wong'}
+        mysql: %{UPDATE `users` SET `users`.`name` = 'wolf' WHERE `users`.`id` IN (-1, -2) AND `users`.`name` = 'wong'},
       )
     end
   end
