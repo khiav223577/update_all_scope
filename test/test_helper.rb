@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start 'test_frameworks'
 
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'update_all_scope'
 
+require 'update_all_scope'
 require 'minitest/autorun'
 
 case ENV['DB']
