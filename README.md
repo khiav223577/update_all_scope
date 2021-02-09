@@ -1,7 +1,7 @@
 # UpdateAllScope
 
 [![Gem Version](https://img.shields.io/gem/v/update_all_scope.svg?style=flat)](https://rubygems.org/gems/update_all_scope)
-[![Build Status](https://api.travis-ci.com/khiav223577/update_all_scope.svg?branch=master)](https://travis-ci.com/khiav223577/update_all_scope)
+[![Build Status](https://api.travis-ci.com/khiav223577/update_all_scope/workflows/Ruby/badge.svg)](https://travis-ci.com/khiav223577/update_all_scope/actions)
 [![RubyGems](http://img.shields.io/gem/dt/update_all_scope.svg?style=flat)](https://rubygems.org/gems/update_all_scope)
 [![Code Climate](https://codeclimate.com/github/khiav223577/update_all_scope/badges/gpa.svg)](https://codeclimate.com/github/khiav223577/update_all_scope)
 [![Test Coverage](https://codeclimate.com/github/khiav223577/update_all_scope/badges/coverage.svg)](https://codeclimate.com/github/khiav223577/update_all_scope/coverage)
