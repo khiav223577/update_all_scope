@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'update_all_scope'
   spec.version       = UpdateAllScope::VERSION
   spec.authors       = ['khiav reoy']
-  spec.email         = ['mrtmrt15xn@yahoo.com.tw']
+  spec.email         = ['khiav223577@gmail.com']
 
   spec.summary       = 'A Ruby Gem for you to write update queries.'
   spec.description   = 'A Ruby Gem for you to write update queries.'
